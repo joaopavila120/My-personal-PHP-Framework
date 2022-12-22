@@ -1,0 +1,16 @@
+{
+    "name": "windows/projeto-ferias",
+    "description": "Framework created go to deep on php fundamentals",
+
+    "authors": [
+        {
+            "name": "joao.avila"
+        }
+    ],
+       "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "require": {}
+}
