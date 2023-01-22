@@ -4,6 +4,7 @@
   use app\core\Application;
   use app\core\Controller;
   use app\core\Request;
+  use app\models\RegisterModel;
 
   /**
    * @author joao.avila
@@ -19,10 +20,23 @@
 
     public function register(Request $request)
     {
-      if ($request->isPost())
-        return "handle submitted data";
+      $registerModel = new RegisterModel();
 
-      $this->setLayout("auth");
-      return $this->render("register");
+      if ($request->isPost())
+      {
+        //here we are getting the form
+        $registerModel->loadData($request->getBody());
+
+        if ($registerModel->validate() && $registerModel->register())
+          return "Success";
+
+        return $this->render("register", [
+          "model" => $registerModel
+        ]);
+      }
+
+      return $this->render("register", [
+        "model" => $registerModel
+      ]);
     }
   }
